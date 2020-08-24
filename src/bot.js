@@ -18,6 +18,12 @@ client.on("message", (message) => {
             .split(/\s+/); // REGEX to prevent duplicate spaces
 
         if (CMD_NAME === "kick") {
+            if (message.member.hasPermission("KICK_MEMBERS")) {
+                return message.reply(
+                    "You do not have the permission to use that command."
+                );
+            }
+
             if (args.length === 0) return message.reply("Please provide an ID");
 
             const member = message.guild.members.cache.get(args[0]);
