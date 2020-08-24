@@ -23,8 +23,14 @@ client.on("message", (message) => {
             const member = message.guild.members.cache.get(args[0]);
 
             if (member) {
-                member.kick();
-                message.channel.send(`${member.user.tag} has been kicked!`);
+                member
+                    .kick()
+                    .then((member) =>
+                        message.channel.send(`${member} has been kicked!`)
+                    )
+                    .catch((err) =>
+                        message.reply("I cannot kick the user! :(")
+                    );
             } else {
                 message.channel.send("Member was not found!");
             }
