@@ -5,14 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./src/bot.js",
-    "dev": "nodemon ./src/bot.js"
+    "start": "nodemon ./src/bot.js"
   },
   "keywords": [],
   "author": "Varun S Athreya",
   "license": "ISC",
   "dependencies": {
     "discord.js": "^12.3.1",
-    "dotenv": "^8.2.0"
+    "dotenv": "^8.2.0",
+    "nodemon": "^2.0.4"
   }
 }
