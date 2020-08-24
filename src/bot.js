@@ -8,7 +8,7 @@ client.on("ready", () => {
     console.log(`${client.user.username} has logged in`);
 });
 
-client.on("message", (message) => {
+client.on("message", async (message) => {
     if (message.author.bot) return;
 
     if (message.content.startsWith(PREFIX)) {
@@ -18,7 +18,7 @@ client.on("message", (message) => {
             .split(/\s+/); // REGEX to prevent duplicate spaces
 
         if (CMD_NAME === "kick") {
-            if (message.member.hasPermission("KICK_MEMBERS")) {
+            if (!message.member.hasPermission("KICK_MEMBERS")) {
                 return message.reply(
                     "You do not have the permission to use that command."
                 );
@@ -39,6 +39,23 @@ client.on("message", (message) => {
                     );
             } else {
                 message.channel.send("Member was not found!");
+            }
+        } else if (CMD_NAME === "ban") {
+            if (!message.member.hasPermission("BAN_MEMBERS")) {
+                return message.reply(
+                    "You do not have the permission to use that command."
+                );
+            }
+
+            if (args.length === 0) return message.reply("Please provide an ID");
+
+            try {
+                const user = await message.guild.members.ban(args[0]);
+                message.channel.send("User was banned successfully!");
+            } catch (err) {
+                message.channel.send(
+                    "An error occured, Either I do not have a permission or user not found!"
+                );
             }
         }
     }
