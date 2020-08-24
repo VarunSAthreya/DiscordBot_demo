@@ -22,49 +22,62 @@ client.on("message", async (message) => {
             .substring(PREFIX.length)
             .split(/\s+/); // REGEX to prevent duplicate spaces
 
-        if (CMD_NAME === "kick") {
-            if (!message.member.hasPermission("KICK_MEMBERS")) {
-                return message.reply(
-                    "You do not have the permission to use that command."
-                );
-            }
-
-            if (args.length === 0) return message.reply("Please provide an ID");
-
-            const member = message.guild.members.cache.get(args[0]);
-
-            if (member) {
-                member
-                    .kick()
-                    .then((member) =>
-                        message.channel.send(`${member} has been kicked!`)
-                    )
-                    .catch((err) =>
-                        message.reply("I cannot kick the user! :(")
+        switch (CMD_NAME) {
+            case "kick": {
+                if (!message.member.hasPermission("KICK_MEMBERS")) {
+                    return message.reply(
+                        "You do not have the permission to use that command."
                     );
-            } else {
-                message.channel.send("Member was not found!");
-            }
-        } else if (CMD_NAME === "ban") {
-            if (!message.member.hasPermission("BAN_MEMBERS")) {
-                return message.reply(
-                    "You do not have the permission to use that command."
-                );
-            }
+                }
 
-            if (args.length === 0) return message.reply("Please provide an ID");
+                if (args.length === 0)
+                    return message.reply("Please provide an ID");
 
-            try {
-                const user = await message.guild.members.ban(args[0]);
-                message.channel.send("User was banned successfully!");
-            } catch (err) {
-                message.channel.send(
-                    "An error occured, Either I do not have a permission or user not found!"
-                );
+                const member = message.guild.members.cache.get(args[0]);
+
+                if (member) {
+                    member
+                        .kick()
+                        .then((member) =>
+                            message.channel.send(`${member} has been kicked!`)
+                        )
+                        .catch((err) =>
+                            message.reply("I cannot kick the user! :(")
+                        );
+                } else {
+                    message.channel.send("Member was not found!");
+                }
+
+                break;
             }
-        } else if (CMD_NAME === "announce") {
-            const msg = args.join(" ");
-            webhookClient.send(`@everyone \n${msg}`);
+            case "ban": {
+                if (!message.member.hasPermission("BAN_MEMBERS")) {
+                    return message.reply(
+                        "You do not have the permission to use that command."
+                    );
+                }
+
+                if (args.length === 0)
+                    return message.reply("Please provide an ID");
+
+                try {
+                    const user = await message.guild.members.ban(args[0]);
+                    message.channel.send(`${user} was banned successfully!`);
+                } catch (err) {
+                    message.channel.send(
+                        "An error occured, Either I do not have a permission or user not found!"
+                    );
+                }
+                break;
+            }
+            case "announce": {
+                const msg = args.join(" ");
+                webhookClient.send(`@everyone \n${msg}`);
+                break;
+            }
+            default:
+                message.reply("Invalid Command!");
+                break;
         }
     }
 });
