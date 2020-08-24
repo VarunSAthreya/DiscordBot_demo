@@ -1,8 +1,13 @@
 require("dotenv").config();
-const { Client } = require("discord.js");
+const { Client, WebhookClient } = require("discord.js");
 
 const PREFIX = "$";
 const client = new Client();
+
+const webhookClient = new WebhookClient(
+    process.env.WEBHOOK_ID,
+    process.env.WEBHOOK_TOKEN
+);
 
 client.on("ready", () => {
     console.log(`${client.user.username} has logged in`);
@@ -57,8 +62,11 @@ client.on("message", async (message) => {
                     "An error occured, Either I do not have a permission or user not found!"
                 );
             }
+        } else if (CMD_NAME === "announce") {
+            const msg = args.join(" ");
+            webhookClient.send(`@everyone \n${msg}`);
         }
     }
 });
 
-client.login(process.env.DISCORDJS_BOT_TOKEN);
+client.login(process.env.DISCORD_BOT_TOKEN);
