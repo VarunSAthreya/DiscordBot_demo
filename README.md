@@ -21,7 +21,7 @@ Created using **[Discord.JS](https://discord.js.org/#/)** module
 
 -   You can create a webhook to a channel in a server by going to it's `settings -> integrations`.
 -   There you can craete webhook then `COPY WEBHOOK URL`.
--   The link would look like **https://discord.com/api/webhooks/`WEBHOOK_ID`/`WEBHOOK_TOKEN`**.
+-   The link would look like `https://discord.com/api/webhooks/`**`WEBHOOK_ID`**`/`**`WEBHOOK_TOKEN`**.
 -   Copy the `ID` and `TOKEN`.
 
 ### To Start the server:
