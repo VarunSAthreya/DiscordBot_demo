@@ -38,7 +38,7 @@ client.on("message", async (message) => {
                 if (member) {
                     try {
                         const user = await member.kick();
-                        message.channel.send(`${user} has been kicked!`);
+                        message.channel.send(`<@${user.id}> has been kicked!`);
                     } catch (err) {
                         console.log(err);
                         message.reply("I cannot kick the user! :(");
@@ -61,7 +61,9 @@ client.on("message", async (message) => {
 
                 try {
                     const user = await message.guild.members.ban(args[0]);
-                    message.channel.send(`${user} was banned successfully!`);
+                    message.channel.send(
+                        `<@${user.id}> was banned successfully!`
+                    );
                 } catch (err) {
                     message.channel.send(
                         "An error occured, Either I do not have a permission or user not found!"
@@ -80,15 +82,15 @@ client.on("message", async (message) => {
                 if (args.length === 0)
                     return message.reply("Please provide an ID");
 
-                let tomute = message.guild.member(
+                let user = message.guild.member(
                     message.mentions.users.first() ||
                         message.guild.members.cache.get(args[0])
                 );
 
-                if (!tomute) return message.reply("Couldn't find user.");
+                if (!user) return message.reply("Couldn't find user.");
 
-                if (tomute.hasPermission("MANAGE_MESSAGES"))
-                    return message.reply("Can't mute them!");
+                if (user.hasPermission("MANAGE_MESSAGES"))
+                    return message.reply("Can't mute user!");
 
                 let muterole = message.guild.roles.find(
                     (muterole) => muterole.name === "muted"
@@ -116,14 +118,14 @@ client.on("message", async (message) => {
                 if (!mutetime)
                     return message.reply("You didn't specify a time!");
 
-                await tomute.addRole(muterole.id);
+                await user.addRole(muterole.id);
                 message.reply(
-                    `${tomute.id} has been muted for ${ms(ms(mutetime))}`
+                    `<@${user.id}> has been muted for ${ms(ms(mutetime))}`
                 );
 
                 setTimeout(function () {
-                    tomute.removeRole(muterole.id);
-                    message.channel.send(`<@${tomute.id}> has been unmuted!`);
+                    user.removeRole(muterole.id);
+                    message.channel.send(`<@${user.id}> has been unmuted!`);
                 }, ms(mutetime));
 
                 break;
