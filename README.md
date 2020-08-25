@@ -1,8 +1,8 @@
 # DiscordBot Demo
 
-## A Simple Discord bot to make an Announcement or Kick/Ban a user!
+A Simple Discord bot to make an Announcements or Kick/Ban a user!
 
-Created using [Discord.JS](https://discord.js.org/#/) module
+Created using **[Discord.JS](https://discord.js.org/#/)** module
 
 ## Getting Started
 
@@ -30,20 +30,20 @@ Created using [Discord.JS](https://discord.js.org/#/) module
 
 ## Available Commands:
 
-**`$kick`**
+1. **`$kick`**
 
--   Used to kick users out of server. (User must be present in server).
--   Syntax: `$kick "user_id"`.
--   The User & Bot must have the permission to kick the users.
+    - Used to kick users out of server. (User must be present in server).
+    - Syntax: `$kick "user_id"`.
+    - The User & Bot must have the permission to kick the users.
 
-**`$ban`**
+2. **`$ban`**
 
--   Used to ban users. (Users not in server can also be banned).
--   Syntax: `$ban "user_id"`.
--   The User & Bot must have the permission to ban the users.
+    - Used to ban users. (Users not in server can also be banned).
+    - Syntax: `$ban "user_id"`.
+    - The User & Bot must have the permission to ban the users.
 
-**`$announce`**
+3. **`$announce`**
 
--   Announces the given message with @everyone.
--   Syntax: `$announce "message"`.
--   No permission requried.
+    - Announces the given message with @everyone.
+    - Syntax: `$announce "message"`.
+    - No permission requried.
