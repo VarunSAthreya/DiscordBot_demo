@@ -1,6 +1,6 @@
 # DiscordBot Demo
 
-A Simple Discord bot to make an Announcements or Kick/Ban a user!
+A Simple Discord bot to make Announcements or Kick/Ban a user!
 
 Created using **[Discord.JS](https://discord.js.org/#/)** module
 
