@@ -107,8 +107,8 @@ client.on("message", async (message) => {
                                 ADD_REACTIONS: false,
                             });
                         });
-                    } catch (e) {
-                        console.log(e.stack);
+                    } catch (err) {
+                        console.log(err);
                     }
                 }
 
@@ -118,7 +118,7 @@ client.on("message", async (message) => {
 
                 await tomute.addRole(muterole.id);
                 message.reply(
-                    `<@${tomute.id}> has been muted for ${ms(ms(mutetime))}`
+                    `${tomute.id} has been muted for ${ms(ms(mutetime))}`
                 );
 
                 setTimeout(function () {
